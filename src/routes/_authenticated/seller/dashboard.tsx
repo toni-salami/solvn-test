@@ -59,6 +59,13 @@ function SellerDashboard() {
           >
             Manage products
           </Link>
+          <Link
+            to="/seller/verification"
+            className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
+          >
+            Verification
+          </Link>
+
         </div>
       </div>
     </div>
