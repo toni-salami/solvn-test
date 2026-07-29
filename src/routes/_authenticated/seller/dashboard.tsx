@@ -1,7 +1,5 @@
-import { createFileRoute, redirect, useNavigate, Link } from "@tanstack/react-router";
-import { useQueryClient } from "@tanstack/react-query";
-import { supabase } from "@/integrations/supabase/client";
-import { fetchUserRole } from "@/lib/user-role";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Store, Package, ShieldCheck, ShoppingBag, Settings } from "lucide-react";
 
 export const Route = createFileRoute("/_authenticated/seller/dashboard")({
   ssr: false,
@@ -15,57 +13,37 @@ export const Route = createFileRoute("/_authenticated/seller/dashboard")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  beforeLoad: async () => {
-    const { data } = await supabase.auth.getUser();
-    if (!data.user) throw redirect({ to: "/auth" });
-    const role = await fetchUserRole(data.user.id);
-    if (role === "buyer") throw redirect({ to: "/buyer/home" });
-    if (role !== "seller") throw redirect({ to: "/auth" });
-  },
   component: SellerDashboard,
 });
 
+const cards = [
+  { to: "/seller/storefront", title: "Storefront", desc: "Branding, slug, and visibility.", icon: Store },
+  { to: "/seller/products", title: "Products", desc: "List, edit, and manage inventory.", icon: Package },
+  { to: "/seller/verification", title: "Verification", desc: "Submit business documents.", icon: ShieldCheck },
+  { to: "/seller/orders", title: "Orders", desc: "Coming soon.", icon: ShoppingBag },
+  { to: "/seller/settings", title: "Settings", desc: "Coming soon.", icon: Settings },
+] as const;
+
 function SellerDashboard() {
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  async function signOut() {
-    await queryClient.cancelQueries();
-    queryClient.clear();
-    await supabase.auth.signOut();
-    navigate({ to: "/auth", replace: true });
-  }
-
   return (
-    <div className="min-h-screen bg-background p-8">
-      <div className="mx-auto max-w-4xl">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold">Seller dashboard</h1>
-          <button onClick={signOut} className="rounded-md border px-3 py-1.5 text-sm">Sign out</button>
-        </div>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Placeholder — Prompt 1.4 will build this out.
+    <div className="p-6 md:p-8">
+      <div className="mx-auto max-w-5xl">
+        <h1 className="text-2xl font-semibold">Overview</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Jump into any section to keep your store running.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          <Link
-            to="/seller/storefront"
-            className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
-          >
-            Set up storefront
-          </Link>
-          <Link
-            to="/seller/products"
-            className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
-          >
-            Manage products
-          </Link>
-          <Link
-            to="/seller/verification"
-            className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
-          >
-            Verification
-          </Link>
-
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((c) => (
+            <Link
+              key={c.to}
+              to={c.to}
+              className="group rounded-lg border p-4 transition-colors hover:bg-accent"
+            >
+              <c.icon className="h-5 w-5 text-muted-foreground group-hover:text-foreground" />
+              <div className="mt-3 text-sm font-medium">{c.title}</div>
+              <div className="mt-1 text-xs text-muted-foreground">{c.desc}</div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>
