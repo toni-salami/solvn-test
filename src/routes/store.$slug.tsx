@@ -25,7 +25,9 @@ type Data = {
     description: string | null;
     storefront_slug: string;
     location_type: string;
+    verification_status: string;
   };
+
   storefront: {
     id: string;
     is_active: boolean;
@@ -55,9 +57,10 @@ function PublicStorefront() {
     void (async () => {
       const { data: seller } = await supabase
         .from("sellers")
-        .select("id, business_name, description, storefront_slug, location_type")
+        .select("id, business_name, description, storefront_slug, location_type, verification_status")
         .eq("storefront_slug", slug)
         .maybeSingle();
+
       if (!seller) {
         if (!cancelled) setState({ loading: false, data: null, missing: true });
         return;
@@ -133,9 +136,23 @@ function PublicStorefront() {
             )}
           </div>
           <div className="min-w-0">
-            <h1 className="truncate text-xl font-semibold sm:text-2xl">{seller.business_name}</h1>
+            <div className="flex items-center gap-2">
+              <h1 className="truncate text-xl font-semibold sm:text-2xl">{seller.business_name}</h1>
+              {seller.verification_status === "verified" && (
+                <span
+                  className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700"
+                  title="Verified seller"
+                >
+                  <svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 10-1.4 1.4l2 2a1 1 0 001.4 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  Verified
+                </span>
+              )}
+            </div>
             {tagline && <p className="mt-1 text-sm text-muted-foreground">{tagline}</p>}
           </div>
+
         </div>
       </header>
 
