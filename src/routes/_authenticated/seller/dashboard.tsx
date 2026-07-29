@@ -46,12 +46,18 @@ function SellerDashboard() {
         <p className="mt-2 text-sm text-muted-foreground">
           Placeholder — Prompt 1.4 will build this out.
         </p>
-        <div className="mt-6">
+        <div className="mt-6 flex flex-wrap gap-2">
           <Link
             to="/seller/storefront"
             className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground"
           >
             Set up storefront
+          </Link>
+          <Link
+            to="/seller/products"
+            className="inline-flex items-center rounded-md border px-4 py-2 text-sm font-medium hover:bg-accent"
+          >
+            Manage products
           </Link>
         </div>
       </div>
