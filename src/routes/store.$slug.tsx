@@ -57,9 +57,10 @@ function PublicStorefront() {
     void (async () => {
       const { data: seller } = await supabase
         .from("sellers")
-        .select("id, business_name, description, storefront_slug, location_type")
+        .select("id, business_name, description, storefront_slug, location_type, verification_status")
         .eq("storefront_slug", slug)
         .maybeSingle();
+
       if (!seller) {
         if (!cancelled) setState({ loading: false, data: null, missing: true });
         return;
