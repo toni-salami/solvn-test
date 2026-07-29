@@ -13,6 +13,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as StoreSlugRouteImport } from './routes/store.$slug'
+import { Route as AuthenticatedSellerVerificationRouteImport } from './routes/_authenticated/seller/verification'
 import { Route as AuthenticatedSellerStorefrontRouteImport } from './routes/_authenticated/seller/storefront'
 import { Route as AuthenticatedSellerDashboardRouteImport } from './routes/_authenticated/seller/dashboard'
 import { Route as AuthenticatedBuyerHomeRouteImport } from './routes/_authenticated/buyer/home'
@@ -39,6 +40,12 @@ const StoreSlugRoute = StoreSlugRouteImport.update({
   path: '/store/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSellerVerificationRoute =
+  AuthenticatedSellerVerificationRouteImport.update({
+    id: '/seller/verification',
+    path: '/seller/verification',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSellerStorefrontRoute =
   AuthenticatedSellerStorefrontRouteImport.update({
     id: '/seller/storefront',
@@ -82,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
   '/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
@@ -93,6 +101,7 @@ export interface FileRoutesByTo {
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
   '/seller/products': typeof AuthenticatedSellerProductsIndexRoute
@@ -106,6 +115,7 @@ export interface FileRoutesById {
   '/_authenticated/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/_authenticated/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/_authenticated/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/_authenticated/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/_authenticated/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/_authenticated/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
   '/_authenticated/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
@@ -119,6 +129,7 @@ export interface FileRouteTypes {
     | '/buyer/home'
     | '/seller/dashboard'
     | '/seller/storefront'
+    | '/seller/verification'
     | '/seller/products/$id'
     | '/seller/products/new'
     | '/seller/products/'
@@ -130,6 +141,7 @@ export interface FileRouteTypes {
     | '/buyer/home'
     | '/seller/dashboard'
     | '/seller/storefront'
+    | '/seller/verification'
     | '/seller/products/$id'
     | '/seller/products/new'
     | '/seller/products'
@@ -142,6 +154,7 @@ export interface FileRouteTypes {
     | '/_authenticated/buyer/home'
     | '/_authenticated/seller/dashboard'
     | '/_authenticated/seller/storefront'
+    | '/_authenticated/seller/verification'
     | '/_authenticated/seller/products/$id'
     | '/_authenticated/seller/products/new'
     | '/_authenticated/seller/products/'
@@ -183,6 +196,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/store/$slug'
       preLoaderRoute: typeof StoreSlugRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/seller/verification': {
+      id: '/_authenticated/seller/verification'
+      path: '/seller/verification'
+      fullPath: '/seller/verification'
+      preLoaderRoute: typeof AuthenticatedSellerVerificationRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/seller/storefront': {
       id: '/_authenticated/seller/storefront'
@@ -233,6 +253,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBuyerHomeRoute: typeof AuthenticatedBuyerHomeRoute
   AuthenticatedSellerDashboardRoute: typeof AuthenticatedSellerDashboardRoute
   AuthenticatedSellerStorefrontRoute: typeof AuthenticatedSellerStorefrontRoute
+  AuthenticatedSellerVerificationRoute: typeof AuthenticatedSellerVerificationRoute
   AuthenticatedSellerProductsIdRoute: typeof AuthenticatedSellerProductsIdRoute
   AuthenticatedSellerProductsNewRoute: typeof AuthenticatedSellerProductsNewRoute
   AuthenticatedSellerProductsIndexRoute: typeof AuthenticatedSellerProductsIndexRoute
@@ -242,6 +263,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBuyerHomeRoute: AuthenticatedBuyerHomeRoute,
   AuthenticatedSellerDashboardRoute: AuthenticatedSellerDashboardRoute,
   AuthenticatedSellerStorefrontRoute: AuthenticatedSellerStorefrontRoute,
+  AuthenticatedSellerVerificationRoute: AuthenticatedSellerVerificationRoute,
   AuthenticatedSellerProductsIdRoute: AuthenticatedSellerProductsIdRoute,
   AuthenticatedSellerProductsNewRoute: AuthenticatedSellerProductsNewRoute,
   AuthenticatedSellerProductsIndexRoute: AuthenticatedSellerProductsIndexRoute,

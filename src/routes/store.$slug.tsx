@@ -25,7 +25,9 @@ type Data = {
     description: string | null;
     storefront_slug: string;
     location_type: string;
+    verification_status: string;
   };
+
   storefront: {
     id: string;
     is_active: boolean;
