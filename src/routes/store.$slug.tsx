@@ -90,6 +90,13 @@ function PublicStorefront() {
         .eq("status", "active")
         .order("created_at", { ascending: false });
 
+      const productsWithUrls = await Promise.all(
+        (products ?? []).map(async (p) => ({
+          ...p,
+          images: await signProductImages(((p.images ?? []) as string[])),
+        })),
+      );
+
       if (cancelled) return;
       setState({
         loading: false,
@@ -98,7 +105,7 @@ function PublicStorefront() {
           seller,
           storefront: { ...storefront, branding },
           logoUrl,
-          products: products ?? [],
+          products: productsWithUrls,
         },
       });
     })();
