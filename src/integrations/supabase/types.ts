@@ -447,7 +447,7 @@ export type Database = {
           {
             foreignKeyName: "storefronts_seller_id_fkey"
             columns: ["seller_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "sellers"
             referencedColumns: ["id"]
           },

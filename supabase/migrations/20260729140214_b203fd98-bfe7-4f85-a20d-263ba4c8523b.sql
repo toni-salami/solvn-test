@@ -1,0 +1,1 @@
+ALTER TABLE public.storefronts ADD CONSTRAINT storefronts_seller_id_unique UNIQUE (seller_id);
