@@ -16,6 +16,9 @@ import { Route as StoreSlugRouteImport } from './routes/store.$slug'
 import { Route as AuthenticatedSellerStorefrontRouteImport } from './routes/_authenticated/seller/storefront'
 import { Route as AuthenticatedSellerDashboardRouteImport } from './routes/_authenticated/seller/dashboard'
 import { Route as AuthenticatedBuyerHomeRouteImport } from './routes/_authenticated/buyer/home'
+import { Route as AuthenticatedSellerProductsIndexRouteImport } from './routes/_authenticated/seller/products/index'
+import { Route as AuthenticatedSellerProductsNewRouteImport } from './routes/_authenticated/seller/products/new'
+import { Route as AuthenticatedSellerProductsIdRouteImport } from './routes/_authenticated/seller/products/$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -53,6 +56,24 @@ const AuthenticatedBuyerHomeRoute = AuthenticatedBuyerHomeRouteImport.update({
   path: '/buyer/home',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSellerProductsIndexRoute =
+  AuthenticatedSellerProductsIndexRouteImport.update({
+    id: '/seller/products/',
+    path: '/seller/products/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSellerProductsNewRoute =
+  AuthenticatedSellerProductsNewRouteImport.update({
+    id: '/seller/products/new',
+    path: '/seller/products/new',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSellerProductsIdRoute =
+  AuthenticatedSellerProductsIdRouteImport.update({
+    id: '/seller/products/$id',
+    path: '/seller/products/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +82,9 @@ export interface FileRoutesByFullPath {
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
+  '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,6 +93,9 @@ export interface FileRoutesByTo {
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
+  '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/seller/products': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,6 +106,9 @@ export interface FileRoutesById {
   '/_authenticated/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/_authenticated/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
   '/_authenticated/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
+  '/_authenticated/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
+  '/_authenticated/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/_authenticated/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -89,6 +119,9 @@ export interface FileRouteTypes {
     | '/buyer/home'
     | '/seller/dashboard'
     | '/seller/storefront'
+    | '/seller/products/$id'
+    | '/seller/products/new'
+    | '/seller/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -97,6 +130,9 @@ export interface FileRouteTypes {
     | '/buyer/home'
     | '/seller/dashboard'
     | '/seller/storefront'
+    | '/seller/products/$id'
+    | '/seller/products/new'
+    | '/seller/products'
   id:
     | '__root__'
     | '/'
@@ -106,6 +142,9 @@ export interface FileRouteTypes {
     | '/_authenticated/buyer/home'
     | '/_authenticated/seller/dashboard'
     | '/_authenticated/seller/storefront'
+    | '/_authenticated/seller/products/$id'
+    | '/_authenticated/seller/products/new'
+    | '/_authenticated/seller/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -166,6 +205,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedBuyerHomeRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/seller/products/': {
+      id: '/_authenticated/seller/products/'
+      path: '/seller/products'
+      fullPath: '/seller/products/'
+      preLoaderRoute: typeof AuthenticatedSellerProductsIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/seller/products/new': {
+      id: '/_authenticated/seller/products/new'
+      path: '/seller/products/new'
+      fullPath: '/seller/products/new'
+      preLoaderRoute: typeof AuthenticatedSellerProductsNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/seller/products/$id': {
+      id: '/_authenticated/seller/products/$id'
+      path: '/seller/products/$id'
+      fullPath: '/seller/products/$id'
+      preLoaderRoute: typeof AuthenticatedSellerProductsIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -173,12 +233,18 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBuyerHomeRoute: typeof AuthenticatedBuyerHomeRoute
   AuthenticatedSellerDashboardRoute: typeof AuthenticatedSellerDashboardRoute
   AuthenticatedSellerStorefrontRoute: typeof AuthenticatedSellerStorefrontRoute
+  AuthenticatedSellerProductsIdRoute: typeof AuthenticatedSellerProductsIdRoute
+  AuthenticatedSellerProductsNewRoute: typeof AuthenticatedSellerProductsNewRoute
+  AuthenticatedSellerProductsIndexRoute: typeof AuthenticatedSellerProductsIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBuyerHomeRoute: AuthenticatedBuyerHomeRoute,
   AuthenticatedSellerDashboardRoute: AuthenticatedSellerDashboardRoute,
   AuthenticatedSellerStorefrontRoute: AuthenticatedSellerStorefrontRoute,
+  AuthenticatedSellerProductsIdRoute: AuthenticatedSellerProductsIdRoute,
+  AuthenticatedSellerProductsNewRoute: AuthenticatedSellerProductsNewRoute,
+  AuthenticatedSellerProductsIndexRoute: AuthenticatedSellerProductsIndexRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -193,3 +259,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
