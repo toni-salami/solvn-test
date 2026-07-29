@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { signProductImages } from "@/lib/product-images";
 
 export const Route = createFileRoute("/store/$slug")({
   head: ({ params }) => ({
