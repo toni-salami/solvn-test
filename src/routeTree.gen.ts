@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedSellerStorefrontRouteImport } from './routes/_authenticated/seller/storefront'
 import { Route as AuthenticatedSellerDashboardRouteImport } from './routes/_authenticated/seller/dashboard'
 import { Route as AuthenticatedBuyerHomeRouteImport } from './routes/_authenticated/buyer/home'
 
@@ -29,6 +30,12 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedSellerStorefrontRoute =
+  AuthenticatedSellerStorefrontRouteImport.update({
+    id: '/seller/storefront',
+    path: '/seller/storefront',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedSellerDashboardRoute =
   AuthenticatedSellerDashboardRouteImport.update({
     id: '/seller/dashboard',
@@ -46,12 +53,14 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
+  '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
+  '/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -60,12 +69,18 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/buyer/home': typeof AuthenticatedBuyerHomeRoute
   '/_authenticated/seller/dashboard': typeof AuthenticatedSellerDashboardRoute
+  '/_authenticated/seller/storefront': typeof AuthenticatedSellerStorefrontRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/buyer/home' | '/seller/dashboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/buyer/home'
+    | '/seller/dashboard'
+    | '/seller/storefront'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/buyer/home' | '/seller/dashboard'
+  to: '/' | '/auth' | '/buyer/home' | '/seller/dashboard' | '/seller/storefront'
   id:
     | '__root__'
     | '/'
@@ -73,6 +88,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/buyer/home'
     | '/_authenticated/seller/dashboard'
+    | '/_authenticated/seller/storefront'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -104,6 +120,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/seller/storefront': {
+      id: '/_authenticated/seller/storefront'
+      path: '/seller/storefront'
+      fullPath: '/seller/storefront'
+      preLoaderRoute: typeof AuthenticatedSellerStorefrontRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/seller/dashboard': {
       id: '/_authenticated/seller/dashboard'
       path: '/seller/dashboard'
@@ -124,11 +147,13 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedBuyerHomeRoute: typeof AuthenticatedBuyerHomeRoute
   AuthenticatedSellerDashboardRoute: typeof AuthenticatedSellerDashboardRoute
+  AuthenticatedSellerStorefrontRoute: typeof AuthenticatedSellerStorefrontRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBuyerHomeRoute: AuthenticatedBuyerHomeRoute,
   AuthenticatedSellerDashboardRoute: AuthenticatedSellerDashboardRoute,
+  AuthenticatedSellerStorefrontRoute: AuthenticatedSellerStorefrontRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
