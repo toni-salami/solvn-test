@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
@@ -24,6 +25,11 @@ import { Route as AuthenticatedSellerProductsIndexRouteImport } from './routes/_
 import { Route as AuthenticatedSellerProductsNewRouteImport } from './routes/_authenticated/seller/products/new'
 import { Route as AuthenticatedSellerProductsIdRouteImport } from './routes/_authenticated/seller/products/$id'
 
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
@@ -106,6 +112,7 @@ const AuthenticatedSellerProductsIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/marketplace': typeof MarketplaceRoute
   '/seller': typeof AuthenticatedSellerRouteRouteWithChildren
   '/store/$slug': typeof StoreSlugRoute
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
@@ -121,6 +128,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/marketplace': typeof MarketplaceRoute
   '/seller': typeof AuthenticatedSellerRouteRouteWithChildren
   '/store/$slug': typeof StoreSlugRoute
   '/buyer/home': typeof AuthenticatedBuyerHomeRoute
@@ -138,6 +146,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/marketplace': typeof MarketplaceRoute
   '/_authenticated/seller': typeof AuthenticatedSellerRouteRouteWithChildren
   '/store/$slug': typeof StoreSlugRoute
   '/_authenticated/buyer/home': typeof AuthenticatedBuyerHomeRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/marketplace'
     | '/seller'
     | '/store/$slug'
     | '/buyer/home'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/auth'
+    | '/marketplace'
     | '/seller'
     | '/store/$slug'
     | '/buyer/home'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/marketplace'
     | '/_authenticated/seller'
     | '/store/$slug'
     | '/_authenticated/buyer/home'
@@ -203,11 +215,19 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  MarketplaceRoute: typeof MarketplaceRoute
   StoreSlugRoute: typeof StoreSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
@@ -355,6 +375,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  MarketplaceRoute: MarketplaceRoute,
   StoreSlugRoute: StoreSlugRoute,
 }
 export const routeTree = rootRouteImport
