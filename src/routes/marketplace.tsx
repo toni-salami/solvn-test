@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { listMarketplaceProducts, type MarketplaceProduct } from "@/lib/marketplace.functions";
 import { signProductImages, formatNaira } from "@/lib/product-images";
+import { CartButton } from "@/components/cart/CartButton";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
@@ -63,9 +66,13 @@ function Marketplace() {
     <div className="min-h-screen bg-background">
       <header className="border-b bg-card">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-6">
-          <Link to="/" className="text-lg font-semibold tracking-tight">
-            Solvn
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link to="/" className="text-lg font-semibold tracking-tight">
+              Solvn
+            </Link>
+            <CartButton />
+          </div>
+
           <form
             className="flex w-full max-w-md gap-2 sm:w-auto"
             onSubmit={(e) => {
@@ -135,7 +142,22 @@ function Marketplace() {
                       </p>
                     </div>
                   </Link>
+                  <div className="px-3 pb-3">
+                    <AddToCartButton
+                      className="w-full"
+                      item={{
+                        productId: p.id,
+                        sellerId: p.seller_id,
+                        businessName: p.business_name,
+                        storefrontSlug: p.storefront_slug,
+                        title: p.title,
+                        priceNgn: p.price_ngn,
+                        imagePath: p.images[0] ?? null,
+                      }}
+                    />
+                  </div>
                 </li>
+
               ))}
             </ul>
 

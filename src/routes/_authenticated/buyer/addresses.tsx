@@ -5,6 +5,7 @@ import { MapPin, Plus, Pencil, Trash2 } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { fetchUserRole } from "@/lib/user-role";
+import { loadBuyerAddresses } from "@/lib/buyer-addresses";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -50,33 +51,6 @@ export const Route = createFileRoute("/_authenticated/buyer/addresses")({
   component: BuyerAddresses,
 });
 
-const SELECT_COLUMNS =
-  "id, buyer_id, label, recipient_name, recipient_phone, address_line, city, state, country, is_default";
-
-async function loadAddresses() {
-  const { data: userData } = await supabase.auth.getUser();
-  const userId = userData.user?.id;
-  if (!userId) throw new Error("Not signed in");
-
-  const { data: buyer, error: buyerError } = await supabase
-    .from("buyers")
-    .select("id")
-    .eq("user_id", userId)
-    .maybeSingle();
-  if (buyerError) throw new Error(buyerError.message);
-  if (!buyer) throw new Error("Buyer profile not found");
-
-  const { data, error } = await supabase
-    .from("shipping_addresses")
-    .select(SELECT_COLUMNS)
-    .eq("buyer_id", buyer.id)
-    .order("is_default", { ascending: false })
-    .order("created_at", { ascending: true });
-  if (error) throw new Error(error.message);
-
-  return { buyerId: buyer.id as string, addresses: (data ?? []) as ShippingAddress[] };
-}
-
 function BuyerAddresses() {
   const queryClient = useQueryClient();
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -84,7 +58,7 @@ function BuyerAddresses() {
 
   const addressesQuery = useQuery({
     queryKey: ["buyer-addresses"],
-    queryFn: loadAddresses,
+    queryFn: loadBuyerAddresses,
   });
 
   const buyerId = addressesQuery.data?.buyerId;

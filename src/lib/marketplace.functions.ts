@@ -15,9 +15,11 @@ export type MarketplaceProduct = {
   title: string;
   price_ngn: number;
   images: string[];
+  seller_id: string;
   business_name: string;
   storefront_slug: string;
 };
+
 
 export const listMarketplaceProducts = createServerFn({ method: "GET" })
   .inputValidator((data: unknown) => inputSchema.parse(data ?? {}))
@@ -32,9 +34,10 @@ export const listMarketplaceProducts = createServerFn({ method: "GET" })
     let query = supabase
       .from("products")
       .select(
-        "id, title, price_ngn, images, created_at, sellers!inner(business_name, storefront_slug, storefronts!inner(is_active))",
+        "id, title, price_ngn, images, created_at, seller_id, sellers!inner(business_name, storefront_slug, storefronts!inner(is_active))",
         { count: "exact" },
       )
+
       .eq("status", "active")
       .eq("sellers.storefronts.is_active", true);
 
@@ -55,9 +58,11 @@ export const listMarketplaceProducts = createServerFn({ method: "GET" })
         title: r.title,
         price_ngn: r.price_ngn,
         images: (r.images ?? []) as string[],
+        seller_id: r.seller_id,
         business_name: seller.business_name,
         storefront_slug: seller.storefront_slug,
       };
+
     });
 
     return { products, total: count ?? 0, page: data.page, pageSize: PAGE_SIZE };
