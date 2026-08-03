@@ -37,29 +37,7 @@ export const Route = createFileRoute("/_authenticated/buyer/cart")({
   component: CartPage,
 });
 
-export function useSignedImages(paths: Array<string | null>) {
-  const key = paths.join("|");
-  const [urls, setUrls] = useState<Record<string, string>>({});
-  useEffect(() => {
-    let cancelled = false;
-    void (async () => {
-      const entries = await Promise.all(
-        paths
-          .filter((p): p is string => !!p)
-          .map(async (p) => [p, await signProductImage(p)] as const),
-      );
-      if (cancelled) return;
-      const next: Record<string, string> = {};
-      for (const [p, url] of entries) if (url) next[p] = url;
-      setUrls(next);
-    })();
-    return () => {
-      cancelled = true;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key]);
-  return urls;
-}
+
 
 function CartPage() {
   const { groups, items, total, count, setQuantity, removeItem } = useCart();
