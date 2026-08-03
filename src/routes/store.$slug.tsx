@@ -2,6 +2,8 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { signProductImages } from "@/lib/product-images";
+import { CartButton } from "@/components/cart/CartButton";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
 export const Route = createFileRoute("/store/$slug")({
   head: ({ params }) => ({
@@ -41,6 +43,7 @@ type Data = {
     description: string | null;
     price_ngn: number;
     images: string[];
+    imagePaths: string[];
     stock_quantity: number;
   }>;
 };
@@ -94,6 +97,7 @@ function PublicStorefront() {
       const productsWithUrls = await Promise.all(
         (products ?? []).map(async (p) => ({
           ...p,
+          imagePaths: (p.images ?? []) as string[],
           images: await signProductImages(((p.images ?? []) as string[])),
         })),
       );
@@ -160,6 +164,9 @@ function PublicStorefront() {
             </div>
             {tagline && <p className="mt-1 text-sm text-muted-foreground">{tagline}</p>}
           </div>
+          <div className="ml-auto">
+            <CartButton />
+          </div>
 
         </div>
       </header>
@@ -190,6 +197,19 @@ function PublicStorefront() {
                   <div className="p-3">
                     <h3 className="line-clamp-2 text-sm font-medium">{p.title}</h3>
                     <p className="mt-1 text-sm font-semibold">{priceFmt.format(p.price_ngn)}</p>
+                    <AddToCartButton
+                      className="mt-3 w-full"
+                      disabled={p.stock_quantity <= 0}
+                      item={{
+                        productId: p.id,
+                        sellerId: seller.id,
+                        businessName: seller.business_name,
+                        storefrontSlug: seller.storefront_slug,
+                        title: p.title,
+                        priceNgn: p.price_ngn,
+                        imagePath: p.imagePaths[0] ?? null,
+                      }}
+                    />
                   </div>
                 </li>
               ))}
