@@ -42,6 +42,9 @@ function BuyerHome() {
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">Marketplace</h1>
           <div className="flex gap-2">
+            <Link to="/buyer/cart" className="rounded-md border px-3 py-1.5 text-sm">
+              Cart
+            </Link>
             <Link to="/buyer/addresses" className="rounded-md border px-3 py-1.5 text-sm">
               Saved addresses
             </Link>
