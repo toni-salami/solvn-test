@@ -1,12 +1,13 @@
 import { createFileRoute, redirect, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react";
 
 import { supabase } from "@/integrations/supabase/client";
 import { fetchUserRole } from "@/lib/user-role";
 import { useCart } from "@/lib/cart";
-import { formatNaira, signProductImage } from "@/lib/product-images";
+import { formatNaira } from "@/lib/product-images";
+import { useSignedImages } from "@/lib/use-signed-images";
 import { Button } from "@/components/ui/button";
+
 
 export const Route = createFileRoute("/_authenticated/buyer/cart")({
   ssr: false,
