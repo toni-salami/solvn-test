@@ -15,9 +15,11 @@ export type MarketplaceProduct = {
   title: string;
   price_ngn: number;
   images: string[];
+  seller_id: string;
   business_name: string;
   storefront_slug: string;
 };
+
 
 export const listMarketplaceProducts = createServerFn({ method: "GET" })
   .inputValidator((data: unknown) => inputSchema.parse(data ?? {}))
