@@ -9,26 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as MarketplaceRouteImport } from './routes/marketplace'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as StoreSlugRouteImport } from './routes/store.$slug'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as MarketplaceRouteImport } from './routes/marketplace'
 import { Route as AuthenticatedSellerRouteRouteImport } from './routes/_authenticated/seller/route'
-import { Route as AuthenticatedSellerVerificationRouteImport } from './routes/_authenticated/seller/verification'
-import { Route as AuthenticatedSellerStorefrontRouteImport } from './routes/_authenticated/seller/storefront'
-import { Route as AuthenticatedSellerSettingsRouteImport } from './routes/_authenticated/seller/settings'
-import { Route as AuthenticatedSellerOrdersRouteImport } from './routes/_authenticated/seller/orders'
-import { Route as AuthenticatedSellerDashboardRouteImport } from './routes/_authenticated/seller/dashboard'
-import { Route as AuthenticatedBuyerHomeRouteImport } from './routes/_authenticated/buyer/home'
+import { Route as StoreSlugRouteImport } from './routes/store.$slug'
 import { Route as AuthenticatedBuyerAddressesRouteImport } from './routes/_authenticated/buyer/addresses'
+import { Route as AuthenticatedBuyerHomeRouteImport } from './routes/_authenticated/buyer/home'
+import { Route as AuthenticatedSellerDashboardRouteImport } from './routes/_authenticated/seller/dashboard'
+import { Route as AuthenticatedSellerOrdersRouteImport } from './routes/_authenticated/seller/orders'
+import { Route as AuthenticatedSellerSettingsRouteImport } from './routes/_authenticated/seller/settings'
+import { Route as AuthenticatedSellerStorefrontRouteImport } from './routes/_authenticated/seller/storefront'
+import { Route as AuthenticatedSellerVerificationRouteImport } from './routes/_authenticated/seller/verification'
 import { Route as AuthenticatedSellerProductsIndexRouteImport } from './routes/_authenticated/seller/products/index'
-import { Route as AuthenticatedSellerProductsNewRouteImport } from './routes/_authenticated/seller/products/new'
 import { Route as AuthenticatedSellerProductsIdRouteImport } from './routes/_authenticated/seller/products/$id'
+import { Route as AuthenticatedSellerProductsNewRouteImport } from './routes/_authenticated/seller/products/new'
 
-const MarketplaceRoute = MarketplaceRouteImport.update({
-  id: '/marketplace',
-  path: '/marketplace',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -36,18 +40,9 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StoreSlugRoute = StoreSlugRouteImport.update({
-  id: '/store/$slug',
-  path: '/store/$slug',
+const MarketplaceRoute = MarketplaceRouteImport.update({
+  id: '/marketplace',
+  path: '/marketplace',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedSellerRouteRoute =
@@ -56,22 +51,26 @@ const AuthenticatedSellerRouteRoute =
     path: '/seller',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedSellerVerificationRoute =
-  AuthenticatedSellerVerificationRouteImport.update({
-    id: '/verification',
-    path: '/verification',
-    getParentRoute: () => AuthenticatedSellerRouteRoute,
+const StoreSlugRoute = StoreSlugRouteImport.update({
+  id: '/store/$slug',
+  path: '/store/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedBuyerAddressesRoute =
+  AuthenticatedBuyerAddressesRouteImport.update({
+    id: '/buyer/addresses',
+    path: '/buyer/addresses',
+    getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
-const AuthenticatedSellerStorefrontRoute =
-  AuthenticatedSellerStorefrontRouteImport.update({
-    id: '/storefront',
-    path: '/storefront',
-    getParentRoute: () => AuthenticatedSellerRouteRoute,
-  } as any)
-const AuthenticatedSellerSettingsRoute =
-  AuthenticatedSellerSettingsRouteImport.update({
-    id: '/settings',
-    path: '/settings',
+const AuthenticatedBuyerHomeRoute = AuthenticatedBuyerHomeRouteImport.update({
+  id: '/buyer/home',
+  path: '/buyer/home',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSellerDashboardRoute =
+  AuthenticatedSellerDashboardRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
 const AuthenticatedSellerOrdersRoute =
@@ -80,22 +79,23 @@ const AuthenticatedSellerOrdersRoute =
     path: '/orders',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
-const AuthenticatedSellerDashboardRoute =
-  AuthenticatedSellerDashboardRouteImport.update({
-    id: '/dashboard',
-    path: '/dashboard',
+const AuthenticatedSellerSettingsRoute =
+  AuthenticatedSellerSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
-const AuthenticatedBuyerHomeRoute = AuthenticatedBuyerHomeRouteImport.update({
-  id: '/buyer/home',
-  path: '/buyer/home',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedBuyerAddressesRoute =
-  AuthenticatedBuyerAddressesRouteImport.update({
-    id: '/buyer/addresses',
-    path: '/buyer/addresses',
-    getParentRoute: () => AuthenticatedRouteRoute,
+const AuthenticatedSellerStorefrontRoute =
+  AuthenticatedSellerStorefrontRouteImport.update({
+    id: '/storefront',
+    path: '/storefront',
+    getParentRoute: () => AuthenticatedSellerRouteRoute,
+  } as any)
+const AuthenticatedSellerVerificationRoute =
+  AuthenticatedSellerVerificationRouteImport.update({
+    id: '/verification',
+    path: '/verification',
+    getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
 const AuthenticatedSellerProductsIndexRoute =
   AuthenticatedSellerProductsIndexRouteImport.update({
@@ -103,16 +103,16 @@ const AuthenticatedSellerProductsIndexRoute =
     path: '/products/',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
-const AuthenticatedSellerProductsNewRoute =
-  AuthenticatedSellerProductsNewRouteImport.update({
-    id: '/products/new',
-    path: '/products/new',
-    getParentRoute: () => AuthenticatedSellerRouteRoute,
-  } as any)
 const AuthenticatedSellerProductsIdRoute =
   AuthenticatedSellerProductsIdRouteImport.update({
     id: '/products/$id',
     path: '/products/$id',
+    getParentRoute: () => AuthenticatedSellerRouteRoute,
+  } as any)
+const AuthenticatedSellerProductsNewRoute =
+  AuthenticatedSellerProductsNewRouteImport.update({
+    id: '/products/new',
+    path: '/products/new',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
 
@@ -234,18 +234,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/marketplace': {
-      id: '/marketplace'
-      path: '/marketplace'
-      fullPath: '/marketplace'
-      preLoaderRoute: typeof MarketplaceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated': {
@@ -255,18 +248,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/store/$slug': {
-      id: '/store/$slug'
-      path: '/store/$slug'
-      fullPath: '/store/$slug'
-      preLoaderRoute: typeof StoreSlugRouteImport
+    '/marketplace': {
+      id: '/marketplace'
+      path: '/marketplace'
+      fullPath: '/marketplace'
+      preLoaderRoute: typeof MarketplaceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/seller': {
@@ -276,25 +269,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSellerRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/seller/verification': {
-      id: '/_authenticated/seller/verification'
-      path: '/verification'
-      fullPath: '/seller/verification'
-      preLoaderRoute: typeof AuthenticatedSellerVerificationRouteImport
-      parentRoute: typeof AuthenticatedSellerRouteRoute
+    '/store/$slug': {
+      id: '/store/$slug'
+      path: '/store/$slug'
+      fullPath: '/store/$slug'
+      preLoaderRoute: typeof StoreSlugRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/seller/storefront': {
-      id: '/_authenticated/seller/storefront'
-      path: '/storefront'
-      fullPath: '/seller/storefront'
-      preLoaderRoute: typeof AuthenticatedSellerStorefrontRouteImport
-      parentRoute: typeof AuthenticatedSellerRouteRoute
+    '/_authenticated/buyer/addresses': {
+      id: '/_authenticated/buyer/addresses'
+      path: '/buyer/addresses'
+      fullPath: '/buyer/addresses'
+      preLoaderRoute: typeof AuthenticatedBuyerAddressesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/_authenticated/seller/settings': {
-      id: '/_authenticated/seller/settings'
-      path: '/settings'
-      fullPath: '/seller/settings'
-      preLoaderRoute: typeof AuthenticatedSellerSettingsRouteImport
+    '/_authenticated/buyer/home': {
+      id: '/_authenticated/buyer/home'
+      path: '/buyer/home'
+      fullPath: '/buyer/home'
+      preLoaderRoute: typeof AuthenticatedBuyerHomeRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/seller/dashboard': {
+      id: '/_authenticated/seller/dashboard'
+      path: '/dashboard'
+      fullPath: '/seller/dashboard'
+      preLoaderRoute: typeof AuthenticatedSellerDashboardRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
     '/_authenticated/seller/orders': {
@@ -304,26 +304,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSellerOrdersRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
-    '/_authenticated/seller/dashboard': {
-      id: '/_authenticated/seller/dashboard'
-      path: '/dashboard'
-      fullPath: '/seller/dashboard'
-      preLoaderRoute: typeof AuthenticatedSellerDashboardRouteImport
+    '/_authenticated/seller/settings': {
+      id: '/_authenticated/seller/settings'
+      path: '/settings'
+      fullPath: '/seller/settings'
+      preLoaderRoute: typeof AuthenticatedSellerSettingsRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
-    '/_authenticated/buyer/home': {
-      id: '/_authenticated/buyer/home'
-      path: '/buyer/home'
-      fullPath: '/buyer/home'
-      preLoaderRoute: typeof AuthenticatedBuyerHomeRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/_authenticated/seller/storefront': {
+      id: '/_authenticated/seller/storefront'
+      path: '/storefront'
+      fullPath: '/seller/storefront'
+      preLoaderRoute: typeof AuthenticatedSellerStorefrontRouteImport
+      parentRoute: typeof AuthenticatedSellerRouteRoute
     }
-    '/_authenticated/buyer/addresses': {
-      id: '/_authenticated/buyer/addresses'
-      path: '/buyer/addresses'
-      fullPath: '/buyer/addresses'
-      preLoaderRoute: typeof AuthenticatedBuyerAddressesRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/_authenticated/seller/verification': {
+      id: '/_authenticated/seller/verification'
+      path: '/verification'
+      fullPath: '/seller/verification'
+      preLoaderRoute: typeof AuthenticatedSellerVerificationRouteImport
+      parentRoute: typeof AuthenticatedSellerRouteRoute
     }
     '/_authenticated/seller/products/': {
       id: '/_authenticated/seller/products/'
@@ -332,18 +332,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSellerProductsIndexRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
-    '/_authenticated/seller/products/new': {
-      id: '/_authenticated/seller/products/new'
-      path: '/products/new'
-      fullPath: '/seller/products/new'
-      preLoaderRoute: typeof AuthenticatedSellerProductsNewRouteImport
-      parentRoute: typeof AuthenticatedSellerRouteRoute
-    }
     '/_authenticated/seller/products/$id': {
       id: '/_authenticated/seller/products/$id'
       path: '/products/$id'
       fullPath: '/seller/products/$id'
       preLoaderRoute: typeof AuthenticatedSellerProductsIdRouteImport
+      parentRoute: typeof AuthenticatedSellerRouteRoute
+    }
+    '/_authenticated/seller/products/new': {
+      id: '/_authenticated/seller/products/new'
+      path: '/products/new'
+      fullPath: '/seller/products/new'
+      preLoaderRoute: typeof AuthenticatedSellerProductsNewRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
   }
@@ -403,3 +403,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

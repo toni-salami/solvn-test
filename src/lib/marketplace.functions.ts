@@ -20,7 +20,7 @@ export type MarketplaceProduct = {
 };
 
 export const listMarketplaceProducts = createServerFn({ method: "GET" })
-  .inputValidator((data: unknown) => inputSchema.parse(data ?? {}))
+  .validator((data: unknown) => inputSchema.parse(data ?? {}))
   .handler(async ({ data }) => {
     const supabase = createClient<Database>(
       process.env["SUPABASE_URL"]!,
