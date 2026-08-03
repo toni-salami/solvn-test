@@ -3,6 +3,9 @@ import { useEffect, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { listMarketplaceProducts, type MarketplaceProduct } from "@/lib/marketplace.functions";
 import { signProductImages, formatNaira } from "@/lib/product-images";
+import { CartButton } from "@/components/cart/CartButton";
+import { AddToCartButton } from "@/components/cart/AddToCartButton";
+
 
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
