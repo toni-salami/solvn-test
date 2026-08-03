@@ -41,7 +41,12 @@ function BuyerHome() {
       <div className="mx-auto max-w-4xl">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">Marketplace</h1>
-          <button onClick={signOut} className="rounded-md border px-3 py-1.5 text-sm">Sign out</button>
+          <div className="flex gap-2">
+            <Link to="/buyer/addresses" className="rounded-md border px-3 py-1.5 text-sm">
+              Saved addresses
+            </Link>
+            <button onClick={signOut} className="rounded-md border px-3 py-1.5 text-sm">Sign out</button>
+          </div>
         </div>
         <p className="mt-2 text-sm text-muted-foreground">
           Placeholder — Phase 2 will build this out.
