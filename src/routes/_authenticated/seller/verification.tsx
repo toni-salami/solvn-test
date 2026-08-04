@@ -106,12 +106,19 @@ function VerificationPage() {
         .from("sellers")
         .update({
           business_name: businessName.trim(),
-          phone: phone.trim(),
-          email: email.trim(),
           verification_status: "pending",
         })
         .eq("id", seller.id);
       if (upErr) throw upErr;
+
+      const { error: contactErr } = await supabase
+        .from("seller_contacts")
+        .upsert(
+          { seller_id: seller.id, phone: phone.trim(), email: email.trim() },
+          { onConflict: "seller_id" },
+        );
+      if (contactErr) throw contactErr;
+
 
       let newDoc: DocRow | null = null;
       if (file) {
