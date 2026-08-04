@@ -18,7 +18,10 @@ export type MarketplaceProduct = {
   seller_id: string;
   business_name: string;
   storefront_slug: string;
+  rating_average: number;
+  rating_count: number;
 };
+
 
 
 export const listMarketplaceProducts = createServerFn({ method: "GET" })
