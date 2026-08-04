@@ -54,8 +54,23 @@ export const listMarketplaceProducts = createServerFn({ method: "GET" })
 
     if (error) throw new Error(error.message);
 
+    const sellerIds = [...new Set((rows ?? []).map((r) => r.seller_id))];
+    const ratings: Record<string, { sum: number; count: number }> = {};
+    if (sellerIds.length > 0) {
+      const { data: reviewRows } = await supabase
+        .from("reviews")
+        .select("seller_id, rating")
+        .in("seller_id", sellerIds);
+      for (const row of reviewRows ?? []) {
+        const agg = (ratings[row.seller_id] ??= { sum: 0, count: 0 });
+        agg.sum += row.rating;
+        agg.count += 1;
+      }
+    }
+
     const products: MarketplaceProduct[] = (rows ?? []).map((r) => {
       const seller = r.sellers as unknown as { business_name: string; storefront_slug: string };
+      const agg = ratings[r.seller_id];
       return {
         id: r.id,
         title: r.title,
@@ -64,9 +79,11 @@ export const listMarketplaceProducts = createServerFn({ method: "GET" })
         seller_id: r.seller_id,
         business_name: seller.business_name,
         storefront_slug: seller.storefront_slug,
+        rating_average: agg ? agg.sum / agg.count : 0,
+        rating_count: agg?.count ?? 0,
       };
-
     });
+
 
     return { products, total: count ?? 0, page: data.page, pageSize: PAGE_SIZE };
   });
