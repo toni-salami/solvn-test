@@ -5,6 +5,8 @@ import { listMarketplaceProducts, type MarketplaceProduct } from "@/lib/marketpl
 import { signProductImages, formatNaira } from "@/lib/product-images";
 import { CartButton } from "@/components/cart/CartButton";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { StarRating } from "@/components/reviews/StarRating";
+
 
 
 export const Route = createFileRoute("/marketplace")({
