@@ -496,7 +496,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      seller_has_active_storefront: {
+        Args: { _seller_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
