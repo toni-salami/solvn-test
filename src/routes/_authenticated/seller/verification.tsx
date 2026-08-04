@@ -59,17 +59,23 @@ function VerificationPage() {
       if (!auth.user) return;
       const { data: s } = await supabase
         .from("sellers")
-        .select("id, business_name, phone, email, verification_status")
+        .select("id, business_name, verification_status")
         .eq("user_id", auth.user.id)
         .maybeSingle();
       if (cancelled || !s) {
         setLoading(false);
         return;
       }
+      const { data: contact } = await supabase
+        .from("seller_contacts")
+        .select("phone, email")
+        .eq("seller_id", s.id)
+        .maybeSingle();
       setSeller(s);
       setBusinessName(s.business_name ?? "");
-      setPhone(s.phone ?? "");
-      setEmail(s.email ?? auth.user.email ?? "");
+      setPhone(contact?.phone ?? "");
+      setEmail(contact?.email ?? auth.user.email ?? "");
+
       const { data: d } = await supabase
         .from("verification_documents")
         .select("id, doc_type, status, file_path, created_at")
