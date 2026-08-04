@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { signProductImages } from "@/lib/product-images";
 import { CartButton } from "@/components/cart/CartButton";
+import { SellerReviews } from "@/components/reviews/SellerReviews";
+
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
 
 export const Route = createFileRoute("/store/$slug")({
