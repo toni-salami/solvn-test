@@ -5,6 +5,8 @@ import { listMarketplaceProducts, type MarketplaceProduct } from "@/lib/marketpl
 import { signProductImages, formatNaira } from "@/lib/product-images";
 import { CartButton } from "@/components/cart/CartButton";
 import { AddToCartButton } from "@/components/cart/AddToCartButton";
+import { StarRating } from "@/components/reviews/StarRating";
+
 
 
 export const Route = createFileRoute("/marketplace")({
@@ -137,10 +139,19 @@ function Marketplace() {
                     <div className="p-3">
                       <h2 className="line-clamp-2 text-sm font-medium">{p.title}</h2>
                       <p className="mt-1 text-sm font-semibold">{formatNaira(p.price_ngn)}</p>
+                      {p.rating_count > 0 && (
+                        <span className="mt-1 flex items-center gap-1">
+                          <StarRating value={p.rating_average} size={12} />
+                          <span className="text-xs text-muted-foreground">
+                            {p.rating_average.toFixed(1)} ({p.rating_count})
+                          </span>
+                        </span>
+                      )}
                       <p className="mt-1 truncate text-xs text-muted-foreground">
                         {p.business_name}
                       </p>
                     </div>
+
                   </Link>
                   <div className="px-3 pb-3">
                     <AddToCartButton
