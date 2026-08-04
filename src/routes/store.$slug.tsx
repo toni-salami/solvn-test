@@ -216,7 +216,10 @@ function PublicStorefront() {
             </ul>
           )}
         </section>
+
+        <SellerReviews sellerId={seller.id} />
       </main>
+
     </div>
   );
 }
