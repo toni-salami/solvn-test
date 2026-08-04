@@ -145,10 +145,9 @@ function VerificationPage() {
       setSeller({
         ...seller,
         business_name: businessName.trim(),
-        phone: phone.trim(),
-        email: email.trim(),
         verification_status: "pending",
       });
+
       if (newDoc) setDocs((prev) => [newDoc as DocRow, ...prev]);
       setFile(null);
       setMessage("Submitted. We'll review your details shortly.");
