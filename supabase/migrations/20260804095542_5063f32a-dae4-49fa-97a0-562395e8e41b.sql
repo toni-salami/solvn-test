@@ -1,0 +1,1 @@
+GRANT EXECUTE ON FUNCTION public.seller_has_active_storefront(uuid) TO anon, authenticated;
