@@ -27,10 +27,9 @@ export const Route = createFileRoute("/_authenticated/seller/verification")({
 type Seller = {
   id: string;
   business_name: string;
-  phone: string | null;
-  email: string | null;
   verification_status: string;
 };
+
 
 type DocRow = {
   id: string;
@@ -60,17 +59,23 @@ function VerificationPage() {
       if (!auth.user) return;
       const { data: s } = await supabase
         .from("sellers")
-        .select("id, business_name, phone, email, verification_status")
+        .select("id, business_name, verification_status")
         .eq("user_id", auth.user.id)
         .maybeSingle();
       if (cancelled || !s) {
         setLoading(false);
         return;
       }
+      const { data: contact } = await supabase
+        .from("seller_contacts")
+        .select("phone, email")
+        .eq("seller_id", s.id)
+        .maybeSingle();
       setSeller(s);
       setBusinessName(s.business_name ?? "");
-      setPhone(s.phone ?? "");
-      setEmail(s.email ?? auth.user.email ?? "");
+      setPhone(contact?.phone ?? "");
+      setEmail(contact?.email ?? auth.user.email ?? "");
+
       const { data: d } = await supabase
         .from("verification_documents")
         .select("id, doc_type, status, file_path, created_at")
@@ -101,12 +106,19 @@ function VerificationPage() {
         .from("sellers")
         .update({
           business_name: businessName.trim(),
-          phone: phone.trim(),
-          email: email.trim(),
           verification_status: "pending",
         })
         .eq("id", seller.id);
       if (upErr) throw upErr;
+
+      const { error: contactErr } = await supabase
+        .from("seller_contacts")
+        .upsert(
+          { seller_id: seller.id, phone: phone.trim(), email: email.trim() },
+          { onConflict: "seller_id" },
+        );
+      if (contactErr) throw contactErr;
+
 
       let newDoc: DocRow | null = null;
       if (file) {
@@ -133,10 +145,9 @@ function VerificationPage() {
       setSeller({
         ...seller,
         business_name: businessName.trim(),
-        phone: phone.trim(),
-        email: email.trim(),
         verification_status: "pending",
       });
+
       if (newDoc) setDocs((prev) => [newDoc as DocRow, ...prev]);
       setFile(null);
       setMessage("Submitted. We'll review your details shortly.");

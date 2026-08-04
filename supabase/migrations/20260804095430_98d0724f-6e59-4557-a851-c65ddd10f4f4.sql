@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.seller_has_active_storefront(uuid) FROM PUBLIC, anon, authenticated;

@@ -317,16 +317,48 @@ export type Database = {
           },
         ]
       }
+      seller_contacts: {
+        Row: {
+          created_at: string
+          email: string | null
+          payout_subaccount_id: string | null
+          phone: string | null
+          seller_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          payout_subaccount_id?: string | null
+          phone?: string | null
+          seller_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          payout_subaccount_id?: string | null
+          phone?: string | null
+          seller_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "seller_contacts_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: true
+            referencedRelation: "sellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sellers: {
         Row: {
           business_name: string
           created_at: string
           description: string | null
-          email: string | null
           id: string
           location_type: string
-          payout_subaccount_id: string | null
-          phone: string | null
           storefront_slug: string
           updated_at: string
           user_id: string
@@ -336,11 +368,8 @@ export type Database = {
           business_name: string
           created_at?: string
           description?: string | null
-          email?: string | null
           id?: string
           location_type: string
-          payout_subaccount_id?: string | null
-          phone?: string | null
           storefront_slug: string
           updated_at?: string
           user_id: string
@@ -350,11 +379,8 @@ export type Database = {
           business_name?: string
           created_at?: string
           description?: string | null
-          email?: string | null
           id?: string
           location_type?: string
-          payout_subaccount_id?: string | null
-          phone?: string | null
           storefront_slug?: string
           updated_at?: string
           user_id?: string
@@ -496,7 +522,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      seller_has_active_storefront: {
+        Args: { _seller_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never
