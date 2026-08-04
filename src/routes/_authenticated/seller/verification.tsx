@@ -27,10 +27,9 @@ export const Route = createFileRoute("/_authenticated/seller/verification")({
 type Seller = {
   id: string;
   business_name: string;
-  phone: string | null;
-  email: string | null;
   verification_status: string;
 };
+
 
 type DocRow = {
   id: string;
