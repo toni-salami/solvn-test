@@ -27,6 +27,7 @@ import { Route as AuthenticatedBuyerCheckoutRouteImport } from './routes/_authen
 import { Route as AuthenticatedBuyerCartRouteImport } from './routes/_authenticated/buyer/cart'
 import { Route as AuthenticatedBuyerAddressesRouteImport } from './routes/_authenticated/buyer/addresses'
 import { Route as AuthenticatedSellerProductsIndexRouteImport } from './routes/_authenticated/seller/products/index'
+import { Route as ApiPublicWebhooksSubscriptionRouteImport } from './routes/api/public/webhooks/subscription'
 import { Route as AuthenticatedSellerProductsNewRouteImport } from './routes/_authenticated/seller/products/new'
 import { Route as AuthenticatedSellerProductsIdRouteImport } from './routes/_authenticated/seller/products/$id'
 
@@ -129,6 +130,12 @@ const AuthenticatedSellerProductsIndexRoute =
     path: '/products/',
     getParentRoute: () => AuthenticatedSellerRouteRoute,
   } as any)
+const ApiPublicWebhooksSubscriptionRoute =
+  ApiPublicWebhooksSubscriptionRouteImport.update({
+    id: '/api/public/webhooks/subscription',
+    path: '/api/public/webhooks/subscription',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AuthenticatedSellerProductsNewRoute =
   AuthenticatedSellerProductsNewRouteImport.update({
     id: '/products/new',
@@ -161,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/api/public/webhooks/subscription': typeof ApiPublicWebhooksSubscriptionRoute
   '/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -182,6 +190,7 @@ export interface FileRoutesByTo {
   '/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/api/public/webhooks/subscription': typeof ApiPublicWebhooksSubscriptionRoute
   '/seller/products': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRoutesById {
@@ -205,6 +214,7 @@ export interface FileRoutesById {
   '/_authenticated/seller/verification': typeof AuthenticatedSellerVerificationRoute
   '/_authenticated/seller/products/$id': typeof AuthenticatedSellerProductsIdRoute
   '/_authenticated/seller/products/new': typeof AuthenticatedSellerProductsNewRoute
+  '/api/public/webhooks/subscription': typeof ApiPublicWebhooksSubscriptionRoute
   '/_authenticated/seller/products/': typeof AuthenticatedSellerProductsIndexRoute
 }
 export interface FileRouteTypes {
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/seller/verification'
     | '/seller/products/$id'
     | '/seller/products/new'
+    | '/api/public/webhooks/subscription'
     | '/seller/products/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/seller/verification'
     | '/seller/products/$id'
     | '/seller/products/new'
+    | '/api/public/webhooks/subscription'
     | '/seller/products'
   id:
     | '__root__'
@@ -271,6 +283,7 @@ export interface FileRouteTypes {
     | '/_authenticated/seller/verification'
     | '/_authenticated/seller/products/$id'
     | '/_authenticated/seller/products/new'
+    | '/api/public/webhooks/subscription'
     | '/_authenticated/seller/products/'
   fileRoutesById: FileRoutesById
 }
@@ -281,6 +294,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   MarketplaceRoute: typeof MarketplaceRoute
   StoreSlugRoute: typeof StoreSlugRoute
+  ApiPublicWebhooksSubscriptionRoute: typeof ApiPublicWebhooksSubscriptionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -411,6 +425,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedSellerProductsIndexRouteImport
       parentRoute: typeof AuthenticatedSellerRouteRoute
     }
+    '/api/public/webhooks/subscription': {
+      id: '/api/public/webhooks/subscription'
+      path: '/api/public/webhooks/subscription'
+      fullPath: '/api/public/webhooks/subscription'
+      preLoaderRoute: typeof ApiPublicWebhooksSubscriptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/seller/products/new': {
       id: '/_authenticated/seller/products/new'
       path: '/products/new'
@@ -485,17 +506,8 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   MarketplaceRoute: MarketplaceRoute,
   StoreSlugRoute: StoreSlugRoute,
+  ApiPublicWebhooksSubscriptionRoute: ApiPublicWebhooksSubscriptionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

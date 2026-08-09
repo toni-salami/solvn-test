@@ -360,6 +360,7 @@ export type Database = {
           id: string
           location_type: string
           storefront_slug: string
+          subscription_status: string
           updated_at: string
           user_id: string
           verification_status: string
@@ -371,6 +372,7 @@ export type Database = {
           id?: string
           location_type: string
           storefront_slug: string
+          subscription_status?: string
           updated_at?: string
           user_id: string
           verification_status?: string
@@ -382,6 +384,7 @@ export type Database = {
           id?: string
           location_type?: string
           storefront_slug?: string
+          subscription_status?: string
           updated_at?: string
           user_id?: string
           verification_status?: string
@@ -474,6 +477,56 @@ export type Database = {
             foreignKeyName: "storefronts_seller_id_fkey"
             columns: ["seller_id"]
             isOneToOne: true
+            referencedRelation: "sellers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subscription_events: {
+        Row: {
+          created_at: string
+          customer_email: string | null
+          event_id: string
+          event_type: string
+          id: string
+          payload: Json
+          processed_at: string | null
+          provider: string
+          seller_id: string | null
+          subscription_code: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          customer_email?: string | null
+          event_id: string
+          event_type: string
+          id?: string
+          payload?: Json
+          processed_at?: string | null
+          provider?: string
+          seller_id?: string | null
+          subscription_code?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string | null
+          event_id?: string
+          event_type?: string
+          id?: string
+          payload?: Json
+          processed_at?: string | null
+          provider?: string
+          seller_id?: string | null
+          subscription_code?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subscription_events_seller_id_fkey"
+            columns: ["seller_id"]
+            isOneToOne: false
             referencedRelation: "sellers"
             referencedColumns: ["id"]
           },
