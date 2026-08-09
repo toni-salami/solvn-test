@@ -97,7 +97,7 @@ export const Route = createFileRoute("/api/public/webhooks/subscription")({
           event_type: eventType,
           subscription_code: subscriptionCode,
           customer_email: email,
-          payload: parsed as unknown as Record<string, unknown>,
+          payload: JSON.parse(rawBody),
         });
 
         if (insertError) {
