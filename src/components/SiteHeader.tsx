@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 
 const navLinks = [
-  { to: "/about", label: "About" },
   { to: "/marketplace", label: "Marketplace" },
+  { to: "/about", label: "About" },
   { to: "/auth", label: "Sign in" },
 ] as const;
 
