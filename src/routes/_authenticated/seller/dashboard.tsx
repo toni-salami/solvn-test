@@ -5,10 +5,10 @@ export const Route = createFileRoute("/_authenticated/seller/dashboard")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Seller dashboard · Solvn" },
-      { name: "description", content: "Manage your Solvn storefront, products, and orders." },
-      { property: "og:title", content: "Seller dashboard · Solvn" },
-      { property: "og:description", content: "Manage your Solvn storefront." },
+      { title: "Seller dashboard · solvn" },
+      { name: "description", content: "Manage your solvn storefront, products, and orders." },
+      { property: "og:title", content: "Seller dashboard · solvn" },
+      { property: "og:description", content: "Manage your solvn storefront." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

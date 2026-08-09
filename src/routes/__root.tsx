@@ -79,14 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "solvn — Storefronts for Nigerian sellers" },
+      { name: "description", content: "solvn is a storefront platform for sellers in Nigeria and the diaspora." },
+      { property: "og:site_name", content: "solvn" },
+      { property: "og:title", content: "solvn — Storefronts for Nigerian sellers" },
+      { property: "og:description", content: "Storefronts for Nigerian sellers everywhere." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {

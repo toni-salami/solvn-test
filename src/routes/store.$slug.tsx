@@ -10,10 +10,10 @@ import { AddToCartButton } from "@/components/cart/AddToCartButton";
 export const Route = createFileRoute("/store/$slug")({
   head: ({ params }) => ({
     meta: [
-      { title: `${params.slug} · Solvn storefront` },
-      { name: "description", content: `Shop from ${params.slug} on Solvn.` },
-      { property: "og:title", content: `${params.slug} · Solvn` },
-      { property: "og:description", content: `Shop from ${params.slug} on Solvn.` },
+      { title: `${params.slug} · solvn storefront` },
+      { name: "description", content: `Shop from ${params.slug} on solvn.` },
+      { property: "og:title", content: `${params.slug} · solvn` },
+      { property: "og:description", content: `Shop from ${params.slug} on solvn.` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

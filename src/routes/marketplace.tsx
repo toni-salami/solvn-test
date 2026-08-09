@@ -12,16 +12,16 @@ import { StarRating } from "@/components/reviews/StarRating";
 export const Route = createFileRoute("/marketplace")({
   head: () => ({
     meta: [
-      { title: "Marketplace — Shop Nigerian sellers on Solvn" },
+      { title: "Marketplace — Shop Nigerian sellers on solvn" },
       {
         name: "description",
         content:
-          "Browse products from every active Solvn storefront. Search by name and shop directly from Nigerian sellers.",
+          "Browse products from every active solvn storefront. Search by name and shop directly from Nigerian sellers.",
       },
-      { property: "og:title", content: "Marketplace — Shop Nigerian sellers on Solvn" },
+      { property: "og:title", content: "Marketplace — Shop Nigerian sellers on solvn" },
       {
         property: "og:description",
-        content: "Browse products from every active Solvn storefront in one place.",
+        content: "Browse products from every active solvn storefront in one place.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -70,7 +70,7 @@ function Marketplace() {
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-6">
           <div className="flex items-center gap-3">
             <Link to="/" className="text-lg font-semibold tracking-tight">
-              Solvn
+              solvn
             </Link>
             <CartButton />
           </div>
@@ -104,7 +104,7 @@ function Marketplace() {
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
         <h1 className="text-2xl font-semibold tracking-tight">Marketplace</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          Newest products from every active Solvn storefront.
+          Newest products from every active solvn storefront.
         </p>
 
         {loading && items.length === 0 ? (

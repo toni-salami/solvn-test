@@ -7,10 +7,10 @@ export const Route = createFileRoute("/_authenticated/seller/verification")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Seller verification · Solvn" },
-      { name: "description", content: "Submit your business details to get verified on Solvn." },
-      { property: "og:title", content: "Seller verification · Solvn" },
-      { property: "og:description", content: "Submit your business details to get verified on Solvn." },
+      { title: "Seller verification · solvn" },
+      { name: "description", content: "Submit your business details to get verified on solvn." },
+      { property: "og:title", content: "Seller verification · solvn" },
+      { property: "og:description", content: "Submit your business details to get verified on solvn." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

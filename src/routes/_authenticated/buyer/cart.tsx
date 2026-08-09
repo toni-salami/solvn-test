@@ -13,15 +13,15 @@ export const Route = createFileRoute("/_authenticated/buyer/cart")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Your cart · Solvn" },
+      { title: "Your cart · solvn" },
       {
         name: "description",
-        content: "Review the products in your Solvn cart, grouped by seller, before checkout.",
+        content: "Review the products in your solvn cart, grouped by seller, before checkout.",
       },
-      { property: "og:title", content: "Your cart · Solvn" },
+      { property: "og:title", content: "Your cart · solvn" },
       {
         property: "og:description",
-        content: "Review the products in your Solvn cart, grouped by seller, before checkout.",
+        content: "Review the products in your solvn cart, grouped by seller, before checkout.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -6,10 +6,10 @@ import { fetchUserRole, homePathForRole } from "@/lib/user-role";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in · Solvn" },
-      { name: "description", content: "Sign in or create your Solvn account as a seller or buyer." },
-      { property: "og:title", content: "Sign in · Solvn" },
-      { property: "og:description", content: "Sign in or create your Solvn account." },
+      { title: "Sign in · solvn" },
+      { name: "description", content: "Sign in or create your solvn account as a seller or buyer." },
+      { property: "og:title", content: "Sign in · solvn" },
+      { property: "og:description", content: "Sign in or create your solvn account." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

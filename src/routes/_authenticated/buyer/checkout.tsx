@@ -24,15 +24,15 @@ export const Route = createFileRoute("/_authenticated/buyer/checkout")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Checkout · Solvn" },
+      { title: "Checkout · solvn" },
       {
         name: "description",
-        content: "Choose a delivery address and review your Solvn order summary before payment.",
+        content: "Choose a delivery address and review your solvn order summary before payment.",
       },
-      { property: "og:title", content: "Checkout · Solvn" },
+      { property: "og:title", content: "Checkout · solvn" },
       {
         property: "og:description",
-        content: "Choose a delivery address and review your Solvn order summary before payment.",
+        content: "Choose a delivery address and review your solvn order summary before payment.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
