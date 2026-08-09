@@ -5,9 +5,9 @@ import { SiteHeader } from "@/components/SiteHeader";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Solvn — We help build impactful ventures" },
-      { name: "description", content: "Solvn is a multi-tenant storefront platform for sellers in Nigeria and the diaspora." },
-      { property: "og:title", content: "Solvn — We help build impactful ventures" },
+      { title: "solvn — We help build impactful ventures" },
+      { name: "description", content: "solvn is a multi-tenant storefront platform for sellers in Nigeria and the diaspora." },
+      { property: "og:title", content: "solvn — We help build impactful ventures" },
       { property: "og:description", content: "Storefronts for Nigerian sellers everywhere." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

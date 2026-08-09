@@ -7,10 +7,10 @@ export const Route = createFileRoute("/_authenticated/seller/storefront")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Storefront setup · Solvn" },
+      { title: "Storefront setup · solvn" },
       { name: "description", content: "Set up your storefront name, URL, logo, and branding." },
-      { property: "og:title", content: "Storefront setup · Solvn" },
-      { property: "og:description", content: "Configure your Solvn storefront." },
+      { property: "og:title", content: "Storefront setup · solvn" },
+      { property: "og:description", content: "Configure your solvn storefront." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],

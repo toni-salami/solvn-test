@@ -5,9 +5,9 @@ export const Route = createFileRoute("/_authenticated/seller/settings")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Settings · Solvn seller" },
+      { title: "Settings · solvn seller" },
       { name: "description", content: "Manage your account and preferences." },
-      { property: "og:title", content: "Settings · Solvn seller" },
+      { property: "og:title", content: "Settings · solvn seller" },
       { property: "og:description", content: "Manage your account and preferences." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

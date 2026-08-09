@@ -11,12 +11,12 @@ export const Route = createFileRoute("/_authenticated/buyer/orders")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Your orders · Solvn" },
-      { name: "description", content: "Track your Solvn orders and leave reviews for sellers." },
-      { property: "og:title", content: "Your orders · Solvn" },
+      { title: "Your orders · solvn" },
+      { name: "description", content: "Track your solvn orders and leave reviews for sellers." },
+      { property: "og:title", content: "Your orders · solvn" },
       {
         property: "og:description",
-        content: "Track your Solvn orders and leave reviews for sellers.",
+        content: "Track your solvn orders and leave reviews for sellers.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

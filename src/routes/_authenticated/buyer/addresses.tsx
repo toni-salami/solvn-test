@@ -27,15 +27,15 @@ export const Route = createFileRoute("/_authenticated/buyer/addresses")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Saved addresses · Solvn" },
+      { title: "Saved addresses · solvn" },
       {
         name: "description",
-        content: "Manage the delivery addresses saved to your Solvn buyer account.",
+        content: "Manage the delivery addresses saved to your solvn buyer account.",
       },
-      { property: "og:title", content: "Saved addresses · Solvn" },
+      { property: "og:title", content: "Saved addresses · solvn" },
       {
         property: "og:description",
-        content: "Manage the delivery addresses saved to your Solvn buyer account.",
+        content: "Manage the delivery addresses saved to your solvn buyer account.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

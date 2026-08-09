@@ -5,16 +5,16 @@ import { SiteHeader } from "@/components/SiteHeader";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Solvn — What guides us" },
+      { title: "About solvn — What guides us" },
       {
         name: "description",
         content:
-          "The beliefs and values behind Solvn: simplicity, clarity, craftsmanship, innovation, focus, impact, integrity and empathy.",
+          "The beliefs and values behind solvn: simplicity, clarity, craftsmanship, innovation, focus, impact, integrity and empathy.",
       },
-      { property: "og:title", content: "About Solvn — What guides us" },
+      { property: "og:title", content: "About solvn — What guides us" },
       {
         property: "og:description",
-        content: "The beliefs and values behind Solvn, a storefront platform for Nigerian sellers.",
+        content: "The beliefs and values behind solvn, a storefront platform for Nigerian sellers.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

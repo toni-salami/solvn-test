@@ -46,7 +46,7 @@ export function SellerSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="border-b px-3 py-3">
         {!collapsed ? (
-          <span className="text-sm font-semibold">Solvn Seller</span>
+          <span className="text-sm font-semibold">solvn Seller</span>
         ) : (
           <span className="text-sm font-semibold">S</span>
         )}

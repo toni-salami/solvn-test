@@ -7,9 +7,9 @@ export const Route = createFileRoute("/_authenticated/seller/products/new")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "New product · Solvn" },
-      { name: "description", content: "Add a new product to your Solvn storefront." },
-      { property: "og:title", content: "New product · Solvn" },
+      { title: "New product · solvn" },
+      { name: "description", content: "Add a new product to your solvn storefront." },
+      { property: "og:title", content: "New product · solvn" },
       { property: "og:description", content: "Add a new product." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

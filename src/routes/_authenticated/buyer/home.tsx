@@ -7,10 +7,10 @@ export const Route = createFileRoute("/_authenticated/buyer/home")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Marketplace · Solvn" },
-      { name: "description", content: "Browse Solvn storefronts and products." },
-      { property: "og:title", content: "Marketplace · Solvn" },
-      { property: "og:description", content: "Browse Solvn storefronts and products." },
+      { title: "Marketplace · solvn" },
+      { name: "description", content: "Browse solvn storefronts and products." },
+      { property: "og:title", content: "Marketplace · solvn" },
+      { property: "og:description", content: "Browse solvn storefronts and products." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
