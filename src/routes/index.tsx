@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export const Route = createFileRoute("/")({
@@ -29,13 +30,13 @@ function Landing() {
             Storefronts for Nigerian sellers everywhere
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-6 text-sm">
-            <Link to="/marketplace" className="border-b border-foreground pb-1 text-foreground">
-              Browse marketplace
-            </Link>
-            <Link to="/auth" className="border-b border-border pb-1 text-muted-foreground hover:text-foreground">
-              Sign in or create an account
-            </Link>
+          <div className="mt-10 flex flex-wrap gap-4">
+            <Button asChild variant="outline">
+              <Link to="/marketplace">Browse the marketplace</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link to="/about">About us</Link>
+            </Button>
           </div>
         </section>
       </main>
